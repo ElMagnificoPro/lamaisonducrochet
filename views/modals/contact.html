@@ -1,0 +1,43 @@
+<div class="modal-header">
+	<h3 class="modal-title">Contactez Nous</h3>
+</div>
+<div class="modal-body">
+   <div ng-if="message.length !==0" class="alert alert-danger">{{message}}</div>
+
+<form id="contact-form">
+
+      <div>
+        <span>
+            <i class="fa fa-user"></i>
+        </span>
+        <input type="text" placeholder="nom" ng-model="data.nom">
+    </div>
+
+    <div>
+        <span>
+            <i class="fa fa-at"></i>
+        </span>
+        <input type="email" placeholder="email" ng-model="data.email">
+    </div>
+    <div>
+        <span>
+            <i class="fa fa-envelope-o"></i>
+        </span>
+        <textarea type="text" placeholder="message" ng-model="data.message"></textarea>
+    </div>
+    <div class="g-recaptcha" id="captchaWidgetId" data-theme="dark" data-sitekey="6LcKuQgUAAAAANJshFDexv3aC7m3IFP45_ILlBqh" ></div>
+    <!-- 6LcKuQgUAAAAAM-BeF3-EingCE33Pbv7bO5VUkUW  openshift-->
+</form>
+
+
+</div>
+<div class="modal-footer">
+
+	<button class="btn1" ng-click="send()">
+        <i ng-class="spinnerClass"></i>
+        	Send
+    </button>
+	<button class="btn1" ng-click="cancel()">
+		Cancel
+	</button>
+</div>

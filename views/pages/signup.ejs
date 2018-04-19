@@ -1,0 +1,107 @@
+
+<div id="signupContainer">
+    <h1><span class="fa fa-sign-in"></span> Signup</h1>
+
+{{message}}
+    <!-- LOGIN FORM -->
+    <form novalidate name="form">
+        <div>
+            <span>
+                <i class="fa fa-at"></i>
+            </span>
+            <input required type="email" name="email" placeholder="e-mail" ng-model="registerInfo.email" tooltip-placement="right"  pattern="^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$" uib-tooltip="e-mail doit être valide"/>
+        <span> <i ng-if="registerInfo.email.length>0" class="fa fa-check"></i> </span>
+        </div>
+
+        <div>
+            <span>
+                <i class="fa fa-lock"></i>
+            </span>
+            <input required type="password" placeholder="password" name="password" pattern="^(?=[^\d_])(\w|[!@#$%]){5,19}$" ng-model="registerInfo.password" tooltip-placement="right" uib-tooltip="superieur a 5 et commence par un caractere">
+        <span> <i ng-if="registerInfo.password.length>0" class="fa fa-check"></i> </span>
+        </div>
+
+        <div>
+            <span>
+                <i class="fa fa-lock"></i>
+            </span>
+            <input required type="password" placeholder="password" name="password2" pattern="^(?=[^\d_])(\w|[!@#$%]){5,19}$" ng-model="registerInfo.password2" tooltip-placement="right" uib-tooltip="repeat password">
+        <span> <i ng-if="registerInfo.password2.length>0 && registerInfo.password2===registerInfo.password" class="fa fa-check"></i> </span>
+        </div>
+
+        <div >
+            <span>
+                <i class="fa fa-users"></i>
+            </span>
+            <input required type="text" name="nom" pattern="^(?=[^\d_ ])([a-zA-Z-_'èçà ]){5,19}$" placeholder="Nom" ng-model="registerInfo.nom" tooltip-placement="right" uib-tooltip="Nom">
+        <span> <i ng-if="registerInfo.nom.length>0" class="fa fa-check"></i> </span>
+        </div>
+
+        <div>
+            <span>
+                <i class="fa fa-user"></i>
+            </span>
+            <input required type="text" name="prenom" placeholder="Prénom" pattern="^(?=[^\d_ ])([a-zA-Z-_'èçà ]){5,19}$" ng-model="registerInfo.prenom" tooltip-placement="right" uib-tooltip="prenom">
+        <span> <i ng-if="registerInfo.prenom.length>0" class="fa fa-check"></i> </span>
+        </div>
+
+        <div>
+            <span>
+                <i class="fa fa-credit-card"></i>
+            </span>
+            <input required type="text" placeholder="CIN" name="CIN" pattern="^[\d]{8}$" ng-model="registerInfo.CIN" tooltip-placement="right" uib-tooltip="8 chiffres"/>
+        <span> <i ng-if="registerInfo.CIN.length>0" class="fa fa-check"></i> </span>
+        </div>
+
+        <div>
+            <span>
+                <i class="fa fa-map-marker"></i>
+            </span>
+            <input required type="text" placeholder="Numéro dans la rue, boîte postale, appartement, étage, etc." ng-model="registerInfo.adresse" tooltip-placement="right" uib-tooltip="adresse de livraison"/>
+        <span> <i ng-if="registerInfo.adresse.length>0" class="fa fa-check"></i> </span>
+        </div>
+
+        <div>
+            <span>
+                <i class="fa fa-envelope-o"></i>
+            </span>
+            <input required type="text" placeholder="Code postal"  pattern="^[0-9]{4}$" name="Zip" ng-model="registerInfo.Zip" tooltip-placement="right" uib-tooltip="code postal 4 chiffres"/>
+        <span> <i ng-if="registerInfo.Zip.length>0" class="fa fa-check"></i> </span>
+        </div> 
+     
+        <div>
+            <span>
+                <i class="fa fa-compass"></i>
+            </span>
+            <input required type="text" placeholder="etat" ng-model="registerInfo.etat" tooltip-placement="right" uib-tooltip="etat"/>
+        <span> <i ng-if="registerInfo.etat.length>0" class="fa fa-check"></i> </span>
+        </div>
+
+        <div>
+            <span>
+                <i class="fa fa-globe"></i>
+            </span>
+            <input required type="text" placeholder="Ville" ng-model="registerInfo.ville" tooltip-placement="right" uib-tooltip="ville"/>
+        <span> <i ng-if="registerInfo.ville.length>0" class="fa fa-check"></i> </span>
+        </div>
+
+        <div>
+            <span>
+                <i class="fa fa-phone"></i>
+            </span>
+            <input required type="text" placeholder="Telephone"  name="telephone" pattern="^[\d]{8}$" ng-model="registerInfo.telephone" tooltip-placement="right" uib-tooltip="8 chiffres"/>
+        <span> <i ng-if="registerInfo.telephone.length>0" class="fa fa-check"></i> </span>
+        </div>
+        <br>
+        <i class="fa fa-check-square-o" ng-show="registerInfo.news" ng-click="registerInfo.news = !registerInfo.news"></i>
+        <i class="fa fa-square-o" ng-hide="registerInfo.news" ng-click="registerInfo.news = !registerInfo.news"></i>
+        <label>S'inscrire a la news letter</label> 
+<br>
+    <button class="btn1" ng-click="test(form)">
+        <i ng-class="spinnerClass"></i>
+        Submit
+    </button><br>
+    <a class="btn-a" href="/">Cancel</a>
+</form>
+<hr>
+</div>

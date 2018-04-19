@@ -1,0 +1,68 @@
+<div id="header">
+
+    <div style='text-align: center;padding-top: 50px'>
+        <img id="logo-principal" src="resources/img/logo.png">
+    </div>
+    <div  style='text-align: center;padding-top: 20px'>
+
+        <nav class="hoverMenu   cl-effect-9">
+            <span class="dropdown " uib-dropdown>
+                <a ui-sref='home' class="dropdown-toggle">
+                    <span>home</span><span>Home</span>
+                </a>
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "deco"})' class="dropdown-toggle">
+                    <span>Déco</span><span>Detail 1</span>
+                </a>
+
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "cuisine"})' class="dropdown-toggle">
+                    <span>Cuisine</span><span>Detail 2</span>
+                </a>
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "parures_de_lit"})' class="dropdown-toggle">
+                    <span>Parures de lit</span><span>Detail 3</span>
+                </a>
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "bebe"})' class="dropdown-toggle">
+                    <span>Bébé</span><span>Detail 4</span>
+                </a>
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "accessoires"})' class="dropdown-toggle">
+                    <span>Accessoires</span><span>Detail 5</span>
+                </a>
+            </span>
+        </nav>
+
+    </div>
+    <uib-carousel interval="myInterval">
+        <uib-slide ng-repeat="slide in slides" active="slide.active">
+            <img ng-src="{{slide.src}}" style="margin:auto;">
+        </uib-slide>
+    </uib-carousel>
+</div>
+<div id="home-articles-container">
+
+    <div ng-repeat="article in db | filter: {featured : true}" class="thumbs">
+        <label>{{article.nom}}</label><br>
+        <div ng-class="imgLoading">
+            <i class="fa fa-spinner fa-pulse"></i>
+            <img imageonload="doThis()" ng-src="{{article.src[0]}}" ng-click="articleModal(article._id)"/>
+         </div>
+         <p>{{article.prix}} DT </p>
+
+        <a class="btn-a" ng-click="articleModal(article._id)">details</a>
+        <a class="btn-a" ng-click="addToCart(article._id)"> <span class="glyphicon glyphicon-shopping-cart"></span> panier</a>
+    </div>
+
+</div>

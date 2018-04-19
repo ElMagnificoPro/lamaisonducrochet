@@ -1,0 +1,59 @@
+<div class="add-article-container" ng-controller="articlesController" style="padding-top:80px">
+	
+	<div  class="article-data-container">
+	<h3>Articles</h3>
+		<table>
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Description</th>
+				<th>Categories</th>
+				<th>Sources(Chemins)</th>
+				<th>Prix</th>
+				<th>Solde</th>
+				<th>is Solde</th>
+				<th>is Featured</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+			<tr  ng-repeat="article in db">
+				<td>{{article._id}}</td>
+				<td>{{article.nom}}</td>
+				<td>{{article.description}}</td>
+				<td>{{article.categorie}}</td>
+				<td>{{article.src}}</td>
+				<td>{{article.prix}}</td>
+				<td>{{article.solde}}</td>
+				<td>{{article.isSolde}}</td>
+				<td>{{article.featured}}</td>
+				<td>
+					<a class="btn btn-info" ng-click="editModal(article._id)">=</a>
+				</td>
+				<td>
+					<a class="btn btn-danger" ng-click="deleteArticle(article._id)">X</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<a class="btn btn-warning" ng-click="addModal()">add Article</a>
+	<a class="btn btn-warning" method="post" href="/articles">get json</a>
+	<br>
+	<br>
+	<h3>Carousel</h3>
+	<table style="border:1px solid black;">
+			<tr style="border:1px solid black;">
+				<th>Src</th>
+			</tr>
+			<tr ng-repeat='src in carouselTab'>
+				<td style="border:1px solid black;margin-left:5px;">
+					{{src.src}}   
+				</td>
+				<td style="border:1px solid black;">
+					<a class="btn btn-danger" ng-click="deleteImg($index)">X</a>
+				</td>	
+			</tr>
+		</table>
+	<input ng-model="imgSrc">
+	<a class="btn btn-warning" ng-click="addImg()">add carousel img</a><br>
+	<a class="btn btn-success" ng-click="sendCarousel()">save carousel</a>
+</div>

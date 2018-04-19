@@ -1,0 +1,20 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{db[index].nom}}</h3>
+</div>
+<div class="modal-body">
+	<div class = "article-modal-image-thumbnails">
+	<img ng-src="{{imgArray[Arrayindex]}}" ><br>
+	<span ng-repeat="thumbnails in imgArray track by $index" class="article-modal-thumbnails">
+		<img ng-src="{{thumbnails}}" ng-click="thumbArray($index)">
+	</span>
+	</div>
+	<div class = "article-modal-description">
+	<p>{{db[index].description}}<p>
+</div>
+</div>
+	<div class="modal-footer">
+		<button class="btn1" ng-click="addToCart(db[index]._id)">add to cart</button>
+		<button class="btn1" ng-click="cancel()">Cancel</button>
+	</div>
+
+</div>

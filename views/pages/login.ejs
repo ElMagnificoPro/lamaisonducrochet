@@ -1,0 +1,36 @@
+
+<div id="loginContainer" ng-controller="loginController">
+
+    <h1>Login</h1>
+
+    <form>
+<p>{{message}}</p>
+      <div>
+        <span>
+            <i class="fa fa-user"></i>
+        </span>
+        <input type="text" placeholder="email" name="email" ng-model = "data.email">
+    </div>
+
+    <div>
+        <span>
+            <i class="fa fa-lock"></i>
+        </span>
+        <input type="password" placeholder="Password" name="password" ng-model = "data.password">
+    </div>
+
+    <button class="btn1" ng-click="send()">
+        <i ng-class="spinnerClass"></i>
+        Login
+    </button>
+</form>
+
+<hr>
+
+<p>besoin d'un compte? <a href="#/signup">Signup</a></p>
+<p>retour <a href="#/home">home</a>.</p>
+
+
+
+</div>
+</div>

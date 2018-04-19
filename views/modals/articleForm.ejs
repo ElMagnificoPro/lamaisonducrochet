@@ -1,0 +1,94 @@
+<div class="modal-header">
+	<h3 class="modal-title" ng-if="edit">Edit Article</h3>
+	<h3 class="modal-title" ng-if="!edit">Add Article</h3>
+</div>
+<div class="modal-body">
+<div class = "article-form-container">
+	<form>
+		<div>
+			<label>Nom</label>
+			<input type="text"  ng-model="addArticleForm.nom"/>
+		</div>
+		<div>
+			<label>Description</label>
+			<input type="text"  ng-model="addArticleForm.description"/>
+		</div>
+		<div>
+			<label>Chemin</label>
+			<input type="text"  ng-model="addArticleSrc"/><span><button ng-click="addSrc()">add</button></span>
+		</div>
+		<table>
+			<tr ng-repeat="src in addArticleSrcTab">
+				<td>
+					{{src}}
+					<a class="btn btn-xs btn-danger" ng-click="itemRemove('cat',src)">X</a>
+				</td>
+			</tr>
+		</table>				
+		<div>
+			<label>Categorie (avec espace,sans accents)</label>
+			<!--<input type="text"  ng-model="addArticleCat"/><span>-->
+			<select ng-model="addArticleCat">
+				<optgroup label="deco">
+					<option>nappe</option>
+					<option>napperon</option>
+				</optgroup>
+				<optgroup label="cuisine">
+					<option>sousplat</option>
+					<option>soustasse</option>
+					<option>mugcover</option>
+					<option>serviettes</option>
+				</optgroup>					
+				<optgroup label="parures_de_lit">
+					<option>unePlace</option>
+					<option>deuxPlaces</option>
+					<option>thrown</option>
+				</optgroup>
+				<optgroup label="bebe">
+					<option>chausson</option>
+					<option>gant</option>
+					<option>bonnet</option>
+					<option>couverture</option>
+				</optgroup>
+				<optgroup label="accessoires">
+					<option>boucles</option>
+					<option>colier</option>
+					<option>bracelets</option>
+					<option>chauffe</option>
+					<option>jambieres</option>
+				</optgroup>
+			</select>
+			<button ng-click="addCat()">add</button></span>
+		</div>
+		<table>
+			<tr>
+				<td ng-repeat="categorie in addArticleCatTab">
+					{{categorie}}
+					<a class="btn btn-xs btn-danger" ng-click="itemRemove('cat',categorie)">X</a>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<label>Prix</label>
+			<input type="number"  ng-model="addArticleForm.prix"/>
+		</div>
+		<div>
+			<label>Solde</label>
+			<input type="number"  ng-model="addArticleForm.solde"/>
+		</div>
+		<div>
+			<input type="Checkbox"  ng-model="addArticleForm.isSolde"/>
+			<label>Article Soldé</label>
+		</div>			
+		<div>
+			<input type="Checkbox"  ng-model="addArticleForm.featured"/>
+			<label>featured</label>
+		</div>
+
+		<div class="modal-footer">																	
+		<button ng-if="!edit" type="submit" ng-click="addArticle()" class="btn btn-success">add article</button>
+		<button ng-if="edit" type="submit" ng-click="editArticle(db[index]._id)" class="btn btn-success">edit article </button>{{db[index]._id}}
+	</div>
+	</form>
+</div>
+</div>

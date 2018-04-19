@@ -1,0 +1,95 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="resources/js/font-awesome-4.3.0/css/font-awesome.css">
+    <link rel="stylesheet" href="resources/js/bootstrap-3.3.2-dist/css/bootstrap.css">
+
+    <script src="resources/js/carousel.js"></script>
+    <script src="resources/js/angular.js"></script>
+    <script src="resources/js/angular-cookies.js"></script>
+    <script src="resources/js/angular-animate.js"></script>
+    <script src="resources/js/angular-resource.js"></script>
+    <script src="resources/js/angular-ui-router.js"></script>
+    <script src="resources/js/loading-bar.js"></script>
+    <!-- <script src="resources/js/script.min.js"></script> -->
+    <script src="resources/js/app.js"></script>
+    <script src="resources/js/ui-bootstrap-tpls-0.13.0.js"></script>
+    
+  <link rel="stylesheet" href="resources/style/style.css"/>
+    <base href="/">
+</head>
+
+<body ng-app="myApp" ng-controller="mainController" >
+
+    <div id='top-bar'>
+     <a id="siteLogo" ui-sref="home"></a> 
+
+     <ul style="text-align: right">
+
+        <li ng-if="isAdmin"><a ui-sref="article_details"><span>admin</span></a></li>
+
+        <li ng-if="isLoggedIn"><a ui-sref='profile'><span><i class="fa fa-user"></i> {{username | limitTo:15}}{{username.length > 15 ? '...' : ''}}</span></a></li>
+        <li ng-if="isLoggedIn"><a href='#' ng-click='confirmModal("/logout")'><span>Logout</span></a></li>
+        <li ng-if="!isLoggedIn"><a href ng-click="loginModal()"><span>Login/Signup</span></a></li>
+        <li class='last'><a ui-sref='checkout'>
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            <span>{{cartObj.yourCart.length}}-article(s)</span>
+        </a></li>
+    </ul>
+</div>
+<div class="main-view-container">
+    <div ui-view class="well"></div>
+</div>
+<footer>
+    <div class="footer-news-letter">
+        s'inscrire a notre newsletter<br>
+        <input type="text" placeholder="email" ng-model="newsletterMail"/>
+        <span>
+            <button class="btn1" ng-click="addNewsletter()">Send</button>
+        </span>
+    </div>
+    <div class="footer-follow">
+        suivez nous<br>
+        <a href="https://www.facebook.com/La-Maison-du-Crochet-399233526838886/" target="_blank">
+            <i class="fa fa-facebook-square"></i>
+        </a>
+        <a href="https://www.instagram.com/la_maison_du_crochet/" target="_blank">
+            <i class="fa fa-instagram"></i>
+        </a>
+        <a href="https://www.twitter.com/@MaisonduCrochet" target="_blank">
+            <i class="fa fa-twitter-square"></i>
+        </a>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <ul class="footer-partial-container">
+                    <li>Information Utiles</li>
+                    <li><a ui-sref="conditions">Conditions générales de vente</a></li>
+                    <li><a href="#">Comment commander</a></li>
+                    <li><a href ng-click="contactModal()">Contact</a></li>
+                </ul>
+            </td>
+            <td>
+                <ul class="footer-partial-container">
+                    <li>Partenaires</li>
+                    <li><a href ng-click="partenaireModal()">Vendre sur la Maison du Crochet</a></li>
+                    <li><a href ng-click="partenaire2Modal()">Devenir partenaire</a></li>
+                </ul>
+            </td>
+            <td>
+                <ul class="footer-partial-container">
+                    <li>contactez-nous</li>
+                    <li><i class="fa fa-mobile"></i> Phone :  20 011 994</li>
+                    <li><a href="mailto:lamaisonducrochet@gmail.com"><i class="fa fa-at"></i> E-mail : lamaisonducrochet@gmail.com</a></li>
+                    <!-- <li><a href="#"><i class="fa fa-map-marker"></i> Adresse</a></li> -->
+                </ul>
+            </td>
+        </tr>  
+    </table>  
+</footer>
+
+
+</body>

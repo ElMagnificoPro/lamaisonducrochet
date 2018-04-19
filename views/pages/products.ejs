@@ -1,0 +1,93 @@
+  <div  style='text-align: center;padding-top: 50px'>
+        <nav class="hoverMenu   cl-effect-9">
+            <span class="dropdown " uib-dropdown>
+                <a ui-sref='home' class="dropdown-toggle">
+                    <span>home</span><span>Home</span>
+                </a>
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "deco"})' class="dropdown-toggle">
+                    <span>Déco</span><span>Detail 1</span>
+                </a>
+
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "cuisine"})' class="dropdown-toggle">
+                    <span>Cuisine</span><span>Detail 2</span>
+                </a>
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "parures_de_lit"})' class="dropdown-toggle">
+                    <span>Parures de lit</span><span>Detail 3</span>
+                </a>
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "bebe"})' class="dropdown-toggle">
+                    <span>Bébé</span><span>Detail 4</span>
+                </a>
+            </span>
+
+            <span class="dropdown" uib-dropdown>
+                <a ui-sref='products({category : "accessoires"})' class="dropdown-toggle">
+                    <span>Accessoires</span><span>Detail 5</span>
+                </a>
+            </span>
+        </nav>
+
+</div>
+
+<nav id="products-articles-sidebar">
+    <div class="search">
+        <span>
+            <i class="fa fa-search"></i>
+        </span>
+        <input placeholder="search" ng-model="searchText">
+    </div>
+    <div ng-if="productsCategory==='deco'">
+        <a uib-btn-checkbox ng-model="sousCategorieModel.nappe" class="tag">Nappe</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.napperon" class="tag">Napperon</a><br>
+    </div>
+    <div ng-if="productsCategory==='cuisine'">
+        <a uib-btn-checkbox ng-model="sousCategorieModel.sousplat" class="tag">Sousplat</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.soustasse" class="tag">Soustasse</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.mugcover" class="tag">Mugcover</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.serviettes" class="tag">Serviettes</a><br>
+
+    </div>
+    <div ng-if="productsCategory==='parures_de_lit'">
+        <a uib-btn-checkbox ng-model="sousCategorieModel.unePlace" class="tag">lit a une place</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.deuxPlaces" class="tag">lit a deux places</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.thrown" class="tag">Thrown</a><br>
+    </div>
+    <div ng-if="productsCategory==='bebe'">
+        <a uib-btn-checkbox ng-model="sousCategorieModel.chausson" class="tag">chausson</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.gant" class="tag">Gant</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.bonnet" class="tag">Bonnet</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.couverture" class="tag">Couverture</a><br>
+    </div>
+    <div ng-if="productsCategory==='accessoires'">
+        <a uib-btn-checkbox ng-model="sousCategorieModel.boucles" class="tag">Boucles d'oreilles</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.colier" class="tag">Colier</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.bracelets" class="tag">Bracelets</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.chauffe" class="tag" >Chauffe main</a><br>
+        <a uib-btn-checkbox ng-model="sousCategorieModel.jambieres" class="tag">Jambières</a><br>
+    </div>
+</nav>
+<div id="products-articles-container">
+
+    <div ng-repeat="thumb in filtredDB = (db | filter: filterFn | filter:searchText) | limitTo:pageLimit:(currentPage-1)*pageLimit" class="thumbs">
+        <label>{{thumb.nom}}</label><br>
+        <img ng-src="{{thumb.src[0]}}" ng-click="articleModal(thumb._id)"/>
+        <p>{{thumb.prix}} DT </p>
+        <a class="btn-a" ng-click="articleModal(thumb._id)">details</a>
+        <a class="btn-a" ng-click="addToCart(thumb._id)"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> panier</a>
+    </div>
+    <div  style="text-align:center;font-weight:bold">
+    <i ng-hide="filtredDB.length" class="alert alert-danger">No Articles</i>
+    </div>
+    <uib-pagination ng-show="filtredDB.length" total-items="filtredDB.length" items-per-page="pageLimit" ng-model="currentPage"></uib-pagination >
+</div>

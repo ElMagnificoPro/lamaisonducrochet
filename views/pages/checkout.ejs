@@ -1,0 +1,86 @@
+<div style='padding-top: 50px;text-align: center;'>
+  <div class='alert alert-danger' ng-show="cartEmpty" style="width:150px;text-align: center;"> cartEmpty </div>
+
+  <div class='alert alert-danger' ng-show="message.length > 0" style="width:150px;text-align: center;">{{message}} </div>
+
+    <div  ng-if="!(cartEmpty)">
+      <table class="items-table">
+        <tr>
+          <th>
+            article
+          </th>
+          <th class="items-name">
+            nom
+          </th>         
+          <th class="items-qty">
+            quantité
+          </th>
+          <th class="items-price">
+            prix
+          </th>
+          <th class="items-total">
+            total
+          </th>
+        </tr>
+
+        <tr ng-repeat="article in checkoutArticles">
+          <td class="items-img">
+            <img ng-src="{{article.item.src[0]}}">
+          </td>
+          <td>
+            <p>{{article.item.nom}}</p>
+          </td>
+          <td class="item-qty-cell">
+            <a ng-click="itemIncrease(article.item._id)" class="increase-decrease-button">+</a>
+            <p> {{article.itemQty}} </p>
+            <a ng-click="itemDecrease(article.item._id)" ng-disabled="article.itemQty === 1" class="increase-decrease-button">-</a>
+          </td>
+          <td>
+            <p>{{article.item.prix}}</p>
+          </td>
+          <td>
+            <p>{{ article.item.prix * article.itemQty}}</p>
+          </td>
+          <td>
+            <a ng-click="itemRemove(article.item._id)" class="remove-button">x</a>
+          </td>
+        </tr>
+      </table>
+
+      <table class="checkout-table">
+        <tr>
+          <th>
+            shipping
+          </th>
+          <td>
+            {{shipping}} DT
+          </td>
+        </tr>
+        <tr>      
+          <th>
+            subtotal
+          </th>
+          <td>
+            {{subTotal}} DT
+          </td>
+        </tr>
+        <tr>      
+          <th>
+            total
+          </th>
+          <td>
+            {{total}} DT
+          </td>
+          </tr>
+          <tr>
+          <td></td>
+          <td class="btn-cell">
+            <a class="btn-a" ng-click="checkoutMail()">checkout</a>
+          </td>
+        </tr>
+      </table>
+
+</div>
+
+</div>
+</div>

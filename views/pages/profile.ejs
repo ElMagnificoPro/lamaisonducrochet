@@ -1,0 +1,246 @@
+<div class="profile-container" style="margin-top:80px;">
+
+    <div>
+        <h1> Profile Page</h1>
+        <a href="#" ng-click='confirmModal("/logout")' class="btn-a">Logout</a>
+        <a href="#" ng-click="deleteAccount()">
+            <b>
+                <i class="fa fa-trash-o" aria-hidden="true"></i> Delete Account</a>
+        </b>
+    </div>
+
+
+    <script>
+        var user = <%-JSON.stringify(user)%>
+        console.log("this is " + user);
+    </script>
+
+    <% if(message.length > 0) { %>
+        <div class="alert alert-danger">
+            <%= message %> please fill your data</div>
+        <% } %>
+            <div ng-if='userNotVerified' class="">
+                email not verified {{registerInfo.email}}
+                <button ng-click="testSendEmail()">send verification</button>
+            </div>
+            <br>
+
+            <form novalidate name="form" class="profile-form">
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.email.length>0" class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit e-mail : </label>
+                <p class="col-md-3">{{registerInfo.email}}</p>
+                <button type="button" class="btn2" ng-click="isCollapsed[0] = !isCollapsed[0]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.email)">email required for purchase</label>
+                <div uib-collapse="isCollapsed[0]">
+                    <span>
+                        <i class="fa fa-at"></i>
+                    </span>
+                    <input type="email" name="email" placeholder="e-mail" ng-model="registerInfo.email" tooltip-placement="right" pattern="^[-a-z0-9~!$%^&*_=+}{?]+([-a-z0-9~!$%^&*_=+}{?]+)*@([a-z0-9_][-a-z0-9_]*([-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}[0-9]{1,3}[0-9]{1,3}[0-9]{1,3}))(:[0-9]{1,5})?$"
+                        uib-tooltip="e-mail doit être valide" />
+                </div>
+                <br>
+
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.password.length>0 && registerInfo.password2.length>0 && registerInfo.password2===registerInfo.password"
+                        class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit password : </label>
+                <p class="col-md-3"></p>
+                <button type="button" class="btn2" ng-click="isCollapsed[1] = !isCollapsed[1]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.password)">password for local auth optional</label>
+                <div uib-collapse="isCollapsed[1]">
+                    <b>old pass</b>
+                    <br>
+                    <span>
+                        <i class="fa fa-lock"></i>
+                    </span>
+                    <input type="password" placeholder="old password" name="oldPassword" pattern="^([a-zA-Z0-9]|[!@#$%]){5,19}$" ng-model="registerInfo.oldPassword">
+                    
+                    <br><b>new pass</b>
+                    <br>
+                    <span>
+                        <i class="fa fa-lock"></i>
+                    </span>
+                    <input type="password" placeholder="new password" name="password" pattern="^([a-zA-Z0-9]|[!@#$%]){5,19}$" ng-model="registerInfo.password">
+                    
+                    <br> <b>confirm pass</b>
+                    <br>
+                    <span>
+                        <i class="fa fa-lock"></i>
+                    </span>
+                    <input type="password" placeholder="confirm password" name="password2" pattern="^([a-zA-Z0-9]|[!@#$%]){5,19}$" ng-model="registerInfo.password2">
+                </div>
+                <br>
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.nom.length>0" class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit name : </label>
+
+                <p class="col-md-3">{{registerInfo.nom}}</p>
+                <button type="button" class="btn2" ng-click="isCollapsed[2] = !isCollapsed[2]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.nom)">nom required for purchase</label>
+                <div uib-collapse="isCollapsed[2]">
+                    <span>
+                        <i class="fa fa-users"></i>
+                    </span>
+                    <input type="text" name="nom" pattern="^(?=[^\d_ ])([a-zA-Z-_'èçà ]){5,19}$" placeholder="Nom" ng-model="registerInfo.nom">
+                </div>
+                <br>
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.prenom.length>0" class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit prenom : </label>
+
+                <p class="col-md-3">{{registerInfo.prenom}}</p>
+                <button type="button" class="btn2" ng-click="isCollapsed[3] = !isCollapsed[3]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.prenom)">prenom required for purchase</label>
+                <div uib-collapse="isCollapsed[3]">
+
+                    <span>
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <input type="text" name="prenom" placeholder="Prénom" pattern="^(?=[^\d_ ])([a-zA-Z-_'èçà ]){5,19}$" ng-model="registerInfo.prenom">
+                </div>
+                <br>
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.CIN.length>0" class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit CIN : </label>
+
+                <p class="col-md-3">{{registerInfo.CIN}}</p>
+                <button type="button" class="btn2" ng-click="isCollapsed[4] = !isCollapsed[4]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.CIN)">CIN required for purchase</label>
+                <div uib-collapse="isCollapsed[4]">
+                    <span>
+                        <i class="fa fa-credit-card"></i>
+                    </span>
+                    <input type="text" placeholder="CIN" name="CIN" pattern="^[\d]{8}$" ng-model="registerInfo.CIN" />
+                </div>
+                <br>
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.adresse.length>0" class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit adresse : </label>
+
+                <p class="col-md-3">{{registerInfo.adresse}}</p>
+                <button type="button" class="btn2" ng-click="isCollapsed[5] = !isCollapsed[5]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.adresse)">adresse required for purchase</label>
+                <div uib-collapse="isCollapsed[5]">
+                    <span>
+                        <i class="fa fa-map-marker"></i>
+                    </span>
+                    <input type="text" placeholder="Numéro dans la rue, boîte postale, appartement, étage, etc." ng-model="registerInfo.adresse"
+                    />
+                </div>
+                <br>
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.Zip.length>0" class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit code postal : </label>
+
+                <p class="col-md-3">{{registerInfo.Zip}}</p>
+                <button type="button" class="btn2" ng-click="isCollapsed[6] = !isCollapsed[6]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.Zip)">codePostal required for purchase</label>
+                <div uib-collapse="isCollapsed[6]">
+                    <span>
+                        <i class="fa fa-envelope-o"></i>
+                    </span>
+                    <input type="text" placeholder="Code postal" pattern="^[0-9]{4}$" name="Zip" ng-model="registerInfo.Zip" />
+                </div>
+                <br>
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.etat.length>0" class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit etat : </label>
+
+                <p class="col-md-3">{{registerInfo.etat}}</p>
+                <button type="button" class="btn2" ng-click="isCollapsed[7] = !isCollapsed[7]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.etat)">etat required for purchase</label>
+                <div uib-collapse="isCollapsed[7]">
+                    <span>
+                        <i class="fa fa-compass"></i>
+                    </span>
+                    <input type="text" placeholder="etat" ng-model="registerInfo.etat" />
+                </div>
+                <br>
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.ville.length>0" class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit ville : </label>
+
+                <p class="col-md-3">{{registerInfo.ville}}</p>
+                <button type="button" class="btn2" ng-click="isCollapsed[8] = !isCollapsed[8]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.ville)">ville required for purchase</label>
+                <div uib-collapse="isCollapsed[8]">
+                    <span>
+                        <i class="fa fa-globe"></i>
+                    </span>
+                    <input type="text" placeholder="Ville" ng-model="registerInfo.ville" />
+                </div>
+                <br>
+                <hr>
+                <div class="col-sm-1">
+                    <i ng-if="registerInfo.telephone.length>0" class="fa fa-check"></i>
+                </div>
+                <label class="col-md-3">edit telephone : </label>
+
+                <p class="col-md-3">{{registerInfo.telephone}}</p>
+                <button type="button" class="btn2" ng-click="isCollapsed[9] = !isCollapsed[9]">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <label class="profile-warning-label" ng-if="!(registerInfo.telephone)">telephone required for purchase</label>
+                <div uib-collapse="isCollapsed[9]">
+                    <span>
+                        <i class="fa fa-phone"></i>
+                    </span>
+                    <input type="text" placeholder="Telephone" name="telephone" pattern="^[\d]{8}$" ng-model="registerInfo.telephone" />
+                </div>
+                <br>
+                <hr>
+                <div class="newsletter">
+                    <label>S'inscrire a la newsletter : </label>
+                    <i class="fa fa-check-square-o" ng-show="registerInfo.news" ng-click="registerInfo.news = !registerInfo.news"></i>
+                    <i class="fa fa-square-o" ng-hide="registerInfo.news" ng-click="registerInfo.news = !registerInfo.news"></i>
+
+                </div>
+                <div style="text-align:center;">
+                    <br>
+                    <button class="btn1" ng-click="test(form)">
+                        <i ng-class="spinnerClass"></i>
+                        Submit
+                    </button>
+                    <br>
+                    <a class="btn-a" href="/">Cancel</a>
+                </div>
+            </form>
+            <hr>
+</div>
