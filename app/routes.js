@@ -315,7 +315,7 @@ module.exports = function (app, passport, nodemailer, smtpTransport, request) {
         var user = req.user;
         //console.log(user);
         if(user.local.password)
-            user.local.password = "x";
+            user.local.password = "";
         res.json(user);
     });
 

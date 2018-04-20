@@ -55,17 +55,16 @@
                 <button type="button" class="btn2" ng-click="isCollapsed[1] = !isCollapsed[1]">
                     <i class="fa fa-pencil-square-o"></i>
                 </button>
-                <label class="profile-warning-label" ng-if="!(registerInfo.password)">password for local auth optional</label>
+                <label class="profile-warning-label" ng-if="!(registerInfo.password==='')">password for local auth optional</label>
                 <div uib-collapse="isCollapsed[1]">
-                    <span ng-if="registerInfo.password">
-                    <b>old pass</b>
-                    <br>
-                    <span>
-                        <i class="fa fa-lock"></i>
-                    </span>
-                </span>
-                    <input type="password" placeholder="old password" name="oldPassword" pattern="^([a-zA-Z0-9]|[!@#$%]){5,19}$" ng-model="registerInfo.oldPassword">
-                    
+                    <span ng-if="registerInfo.local.password===''">
+                        <b>old pass</b>
+                        <br>
+                        <span>
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <input type="password" placeholder="old password" name="oldPassword" pattern="^([a-zA-Z0-9]|[!@#$%]){5,19}$" ng-model="registerInfo.oldPassword">
+                    </span>  
                     <br><b>new pass</b>
                     <br>
                     <span>
