@@ -27,18 +27,18 @@ var configDB = require('./config/database.js');
 //var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 //heroku
 var port = process.env.PORT || 8080;
-var server_ip_address ='127.0.0.1';
+var server_ip_address = '127.0.0.1';
 //https
+if (!process.env.production) {
+  var forceHttps = function (req, res, next) {
+    if (!req.secure) {
+      return res.redirect('https://' + req.headers.host + req.url);
+    }
+    return next();
+  };
+  app.use(forceHttps);
 
-var forceHttps = function (req, res, next) {
-  if (!req.secure) {
-    return res.redirect('https://' + req.headers.host + req.url);
-  }
-  return next();
-};
-app.use(forceHttps);
-
-
+}
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -87,12 +87,12 @@ const httpsOptions = {
   cert: fs.readFileSync('./ssl/cert.pem')
 };
 
-if(!process.env.production){
-const server = https.createServer(httpsOptions, app).listen(port, server_ip_address, () => {
-  console.log('the magic happens on ' + server_ip_address + ":" + port);
-});
-}else{
+if (!process.env.production) {
+  const server = https.createServer(httpsOptions, app).listen(port, server_ip_address, () => {
+    console.log('the magic happens on ' + server_ip_address + ":" + port);
+  });
+} else {
   app.listen(port, function () {
     console.log('the magic happens on ' + port);
-});
+  });
 }
