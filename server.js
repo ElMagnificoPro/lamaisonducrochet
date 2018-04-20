@@ -87,7 +87,7 @@ const httpsOptions = {
   cert: fs.readFileSync('./ssl/cert.pem')
 };
 
-if(process.env.production){
+if(!process.env.production){
 const server = https.createServer(httpsOptions, app).listen(port, server_ip_address, () => {
   console.log('the magic happens on ' + server_ip_address + ":" + port);
 });
