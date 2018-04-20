@@ -92,9 +92,7 @@ const server = https.createServer(httpsOptions, app).listen(port, server_ip_addr
   console.log('the magic happens on ' + server_ip_address + ":" + port);
 });
 }else{
-  server.listen(port, function () {
- 
+  app.listen(port, function () {
     console.log('the magic happens on ' + port);
- 
 });
 }
