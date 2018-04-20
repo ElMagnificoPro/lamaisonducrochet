@@ -24,10 +24,10 @@ var configDB = require('./config/database.js');
 //openshift
 //var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 //var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-
+//var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 //heroku
 var port = process.env.PORT || 8080;
-var server_ip_address = (process.env.production)?'0.0.0.0':'127.0.0.1';
+var server_ip_address ='127.0.0.1';
 //https
 
 var forceHttps = function (req, res, next) {
