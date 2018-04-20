@@ -798,6 +798,7 @@ app.controller('profileController', function ($scope, $http, $timeout) {
     })
     .then(function (response) {
       $scope.registerInfo = response.data;
+      $scope.registerInfo.password = $scope.registerInfo.local.password;
       $scope.userNotVerified = response.data.verified;
       $scope.userNotVerified = !($scope.userNotVerified);
       console.log($scope.registerInfo);

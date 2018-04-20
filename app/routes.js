@@ -313,8 +313,9 @@ module.exports = function (app, passport, nodemailer, smtpTransport, request) {
 
     app.get('/getuserdata', isLoggedIn, function (req, res) {
         var user = req.user;
-        console.log(user);
-        user.local = undefined;
+        //console.log(user);
+        if(user.local.password)
+            user.local.password = "x";
         res.json(user);
     });
 
@@ -346,12 +347,17 @@ module.exports = function (app, passport, nodemailer, smtpTransport, request) {
             user.email = req.bodyEmail("email");
         }
         if (req.bodyString("password") !== undefined && req.bodyString("password") !== '') {
-            if(user.validPassword(req.bodyString("oldPassword"))){
-            user.local.password = user.generateHash(req.bodyString("password"));
-            }else{
-                console.log("invalid pass");
+            if (user.local.password) {
+                if (user.validPassword(req.bodyString("oldPassword"))) {
+                    user.local.password = user.generateHash(req.bodyString("password"));
+                } else {
+                    console.log("invalid pass");
+                }
+            } else {
+                user.local.password = user.generateHash(req.bodyString("password"));
             }
         }
+
 
         if (req.bodyString("nom") !== '') {
             user.nom = req.bodyString("nom");
@@ -427,7 +433,7 @@ module.exports = function (app, passport, nodemailer, smtpTransport, request) {
         if (req.body.email) {
             var newsletter = new NewsLetter();
             newsletter.email = req.bodyEmail("email");
-            if(!validator.isEmail(newsletter.email))
+            if (!validator.isEmail(newsletter.email))
                 return;
             newsletter.save(function (err) {
                 if (err)
@@ -446,7 +452,7 @@ module.exports = function (app, passport, nodemailer, smtpTransport, request) {
     // =============================================================================
 
     app.post('/contactUs', function (req, res) {
-        var url ={};
+        var url = {};
         if (process.env.production) {
             url = {
                 url: 'https://www.google.com/recaptcha/api/siteverify?secret=6LcKuQgUAAAAANJshFDexv3aC7m3IFP45_ILlBqh&response=' + req.body.response
@@ -461,7 +467,7 @@ module.exports = function (app, passport, nodemailer, smtpTransport, request) {
             if (JSON.parse(body).success) {
                 var contactus = new ContactUs();
                 contactus.email = req.bodyEmail("email");
-                if(!validator.isEmail(contactus.email)){
+                if (!validator.isEmail(contactus.email)) {
                     res.send({
                         message: 'email invalide'
                     });
@@ -857,7 +863,7 @@ function isAdmin(req, res, next) {
     if (req.isAuthenticated()) {
         if (req.user.email === "admin@admin.com" &&
             req.user.nom === "admin" &&
-            req.user.prenom === "admin" ) {
+            req.user.prenom === "admin") {
             return next();
         }
     }
