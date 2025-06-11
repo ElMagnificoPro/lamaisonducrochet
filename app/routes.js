@@ -455,11 +455,11 @@ module.exports = function (app, passport, nodemailer, smtpTransport, request) {
         var url = {};
         if (process.env.production) {
             url = {
-                url: 'https://www.google.com/recaptcha/api/siteverify?secret=6LcKuQgUAAAAANJshFDexv3aC7m3IFP45_ILlBqh&response=' + req.body.response
+              
             };
         } else {
             url = {
-                url: 'https://www.google.com/recaptcha/api/siteverify?secret=6LeRmhMTAAAAAPKG38U_oXGwJiylfNlQEuEh3TF-&response=' + req.body.response
+                
             };
         }
         request.post(url, function (err, httpResponse, body) {
