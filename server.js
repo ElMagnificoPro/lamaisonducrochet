@@ -58,7 +58,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({
-  secret: 'YammaLasmarDounyHEY',
+  
   cookie: {
     maxAge: 3600000 * 24 * 30
   },
